@@ -3,7 +3,7 @@ import buttons
 class Snake :
     def __init__(self):
         self.Snake_pos = [[0,0]]
-        self.Direction = "LEFT"
+        self.Direction = "UP"
         self.turnLEFT = buttons.Buttons(4)
         self.turnRIGHT = buttons.Buttons(5)
         self.turnDOWN = buttons.Buttons(6)
