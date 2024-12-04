@@ -39,11 +39,11 @@ class Direction :
     
     def change_direction(self) :
         print("X : ", self.getX(), " Y : ",self.getY())
-        if self.getX() > 4000 and self.dirSTR != "LEFT" :
-            self.dirSTR = "RIGHT"
-        elif self.getY() > 4000 and self.dirSTR != "UP"  :
+        if self.getX() > 4000 and self.dirSTR != "UP" :
             self.dirSTR = "DOWN"
-        elif self.getX() < 50 and self.dirSTR != "RIGHT" :
+        elif self.getY() > 4000 and self.dirSTR != "RIGHT"  :
             self.dirSTR = "LEFT"
-        elif self.getY() < 50 and self.dirSTR != "DOWN" :
+        elif self.getX() < 50 and self.dirSTR != "DOWN" :
             self.dirSTR = "UP"
+        elif self.getY() < 50 and self.dirSTR != "LEFT" :
+            self.dirSTR = "RIGHT"

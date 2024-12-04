@@ -1,6 +1,7 @@
 import time 
 import snake
 import ledboard
+import buzzer
 import apple
 from machine import Pin
 
@@ -11,6 +12,8 @@ class Game :
         self.ledboard = ledboard.LEDBoard()
         self.apple = apple.Apple()
         self.restart = Pin(6, Pin.IN, Pin.PULL_UP)
+        self.buzzer = buzzer.Buzzer()
+
 
     def GameOver(self):
         print("Ton score :", self.score)
@@ -39,7 +42,7 @@ class Game :
         self.score += 1
 
     def gameLoop(self) :
-        print("game loop")
+        self.buzzer.start()
         while True :
 
             # Clear et dessine le jeu
