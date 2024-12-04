@@ -2,6 +2,7 @@ import time
 import snake
 import ledboard
 import apple
+from machine import Pin
 
 class Game :
     def __init__(self):
@@ -9,6 +10,7 @@ class Game :
         self.snake = snake.Snake()
         self.ledboard = ledboard.LEDBoard()
         self.apple = apple.Apple()
+        self.restart = Pin(6, Pin.IN, Pin.PULL_UP)
 
     def GameOver(self):
         print("Ton score :", self.score)
@@ -20,12 +22,24 @@ class Game :
             self.ledboard.np.write()
             time.sleep_ms(25)
         self.ledboard.np.write()
-        
+        while True :
+            if self.restart.value() == 0 :
+                self.restartGame()
+            time.sleep(0.3)
+            
+    def restartGame(self) :
+        self.score = 0
+        self.snake = snake.Snake()
+        self.ledboard = ledboard.LEDBoard()
+        self.apple = apple.Apple() 
+        print("je restart")
+        self.gameLoop()       
 
     def addpoint(self) :
         self.score += 1
 
     def gameLoop(self) :
+        print("game loop")
         while True :
 
             # Clear et dessine le jeu
