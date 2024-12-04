@@ -6,6 +6,7 @@ from time import sleep
 class Buzzer: 
     def __init__(self):
         self.pwm = PWM(Pin(7, Pin.OUT))
+        self.pwm.duty(0)
         
     def play(self, freq, wait):
         self.pwm.duty(200)

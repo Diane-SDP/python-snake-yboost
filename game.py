@@ -42,6 +42,7 @@ class Game :
         self.score += 1
 
     def gameLoop(self) :
+        self.ledboard.clear(self.apple.apple_pos)
         self.buzzer.start()
         while True :
 
@@ -56,7 +57,8 @@ class Game :
                 break
 
             # Vérifie si mange une pomme
-            if self.apple.verify_apple(self.ledboard.grid[self.snake.Snake_pos[0][0]][self.snake.Snake_pos[0][1]], self.apple.apple_pos) :
+            if self.apple.verify_apple(self.ledboard.grid[self.snake.Snake_pos[0][0]][self.snake.Snake_pos[0][1]]) :
+                self.apple.apple_pos = self.apple.generate_apple(self.snake.Snake_pos)
                 self.addpoint()
                 self.ledboard.drawapple(self.apple.apple_pos)
                 self.snake.justAte = True
