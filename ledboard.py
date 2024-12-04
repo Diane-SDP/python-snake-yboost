@@ -14,3 +14,8 @@ class LEDBoard :
     def drawapple(self, apple) :
         self.np[apple] = (0,5,0)
         self.np.write()
+
+    def drawsnake(self, snakepos) :
+        for elt in snakepos :
+                self.np[self.grid[elt[0]][elt[1]]] = (5, 0, 0)
+        self.np.write()

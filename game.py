@@ -27,17 +27,15 @@ class Game :
         while True :
             self.ledboard.clear(self.apple.apple_pos)
             self.ledboard.drawapple(self.apple.apple_pos)
-            if self.score == 3 :
+            if self.snake.verifycolision() :
                 self.win()
                 break
-
-            for i in range (len(self.snake.Snake_pos)) :
-                self.ledboard.np[self.ledboard.grid[self.snake.Snake_pos[0][0]][self.snake.Snake_pos[0][1]]] = (5, 0, 0)
-            self.ledboard.np.write()
+            self.ledboard.drawsnake(self.snake.Snake_pos)
 
             if self.apple.verify_apple(self.ledboard.grid[self.snake.Snake_pos[0][0]][self.snake.Snake_pos[0][1]], self.apple.apple_pos) :
                 self.addpoint()
                 self.ledboard.drawapple(self.apple.apple_pos)
+                self.snake.justAte = True
                 
             self.snake.update_position()
 
