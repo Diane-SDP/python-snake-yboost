@@ -42,7 +42,6 @@ class Game :
         self.score += 1
 
     def gameLoop(self) :
-        self.ledboard.clear(self.apple.apple_pos)
         self.buzzer.start()
         while True :
 

@@ -8,8 +8,7 @@ class LEDBoard :
 
     def clear(self, apple) :
         for i in range (64) :
-            if (i != apple) :
-                self.np[i] = (0,0,0)
+            self.np[i] = (0,0,0)
                 
     def drawapple(self, apple) :
         self.np[apple] = (0,5,0)
