@@ -44,5 +44,9 @@ Welcome to the Snake Game!
 ### Software
 
 - Python 3.*
-- Neopixel : run ```pip install neopixel``` to install
+- Neopixel : run ```pip install micropython-neopixel``` to install
 - Thonny (or any other code editor that can implements the code on your ESP)
+
+## Electrical diagram
+
+[See the PDF file here](./img/Job1.PDF)
