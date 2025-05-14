@@ -55,7 +55,6 @@ class Market :
         self.printMarket()
         while True :
             if self.direction.getDirection() == "UP" and self.upgrades.appleValue < 9:
-                print("UP")
                 if self.coins < self.upgrades.appleValuePrices[self.upgrades.appleValue] :
                     print("Tu n'as pas assez de pommes ! Rejoue pour en récolter")
                     time.sleep(1)
@@ -65,7 +64,6 @@ class Market :
                     self.printMarket()
                 
             if self.direction.getDirection() == "RIGHT" and self.upgrades.goldDrop < 10 :
-                print("RIGHT")
                 if self.coins < self.upgrades.goldDropPrice[self.upgrades.goldDrop] :
                     print("Tu n'as pas assez de pommes ! Rejoue pour en récolter")
                     time.sleep(1)
@@ -75,7 +73,6 @@ class Market :
                     self.printMarket()
 
             if self.direction.getDirection() == "LEFT" and self.upgrades.reborn == False:
-                print("LEFT")
                 if self.coins < self.upgrades.rebornPrice:
                     print("Tu n'as pas assez de pommes ! Rejoue pour en récolter")
                     time.sleep(1)
@@ -85,7 +82,6 @@ class Market :
                     self.printMarket()
 
             if self.direction.getDirection() == "DOWN" :
-                print("DOWN")
                 return "restart"
             
             if self.restart.value() == 0 :
