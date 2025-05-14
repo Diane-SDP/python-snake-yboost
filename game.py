@@ -2,44 +2,51 @@ import time
 import snake
 import ledboard
 import buzzer
+import direction
+import market
 import apple
 from machine import Pin
 
 class Game :
     def __init__(self):
-        self.score = 0
-        self.snake = snake.Snake()
+        self.direction = direction.Direction()
+        self.snake = snake.Snake(self.direction)
         self.ledboard = ledboard.LEDBoard()
         self.apple = apple.Apple()
-        self.restart = Pin(6, Pin.IN, Pin.PULL_UP)
         self.buzzer = buzzer.Buzzer()
+        self.market = market.Market(self.direction)
 
 
     def GameOver(self):
-        print("Ton score :", self.score)
-        n = self.ledboard.np.n
-        for i in range(4 * n):
-            for j in range(n):
-                self.ledboard.np[j] = (0, 0, 0)
-            self.ledboard.np[i % n] = (5, 5, 5)
-            self.ledboard.np.write()
-            time.sleep_ms(25)
-        self.ledboard.np.write()
-        while True :
-            if self.restart.value() == 0 :
-                self.restartGame()
-            time.sleep(0.3)
+        # self.ledboard.GOScreeen()
+        choice = self.market.marketChoice()
+        if choice == "reinit" :
+            self.reInitGame()
+        else :
+            self.restartGame()
             
-    def restartGame(self) :
-        self.score = 0
-        self.snake = snake.Snake()
+    def reInitGame(self) :
+        self.direction = direction.Direction()
+        self.snake = snake.Snake(self.direction)
         self.ledboard = ledboard.LEDBoard()
         self.apple = apple.Apple() 
-        print("je restart")
-        self.gameLoop()       
+        self.market = market.Market()
+        print("Réinitialisation...")
+        self.gameLoop()     
+            
+    def restartGame(self) :
+        self.direction = direction.Direction()
+        self.snake = snake.Snake(self.direction)
+        self.ledboard = ledboard.LEDBoard()
+        self.apple = apple.Apple() 
+        print("Lancement de la partie...")
+        self.gameLoop()
 
     def addpoint(self) :
-        self.score += 1
+        if self.apple.golden :
+            self.market.coins += (self.market.upgrades.appleValue + 1) * 3
+        else :
+            self.market.coins += (self.market.upgrades.appleValue + 1) 
 
     def gameLoop(self) :
         self.buzzer.start()
@@ -47,19 +54,22 @@ class Game :
 
             # Clear et dessine le jeu
             self.ledboard.clear(self.apple.apple_pos)
-            self.ledboard.drawapple(self.apple.apple_pos)
+            self.ledboard.drawapple(self.apple)
             self.ledboard.drawsnake(self.snake.Snake_pos)
 
             # Vérifie si GO
             if self.snake.verifycolision() :
-                self.GameOver()
-                break
+                self.ledboard.drawCollision(self.snake.getHeadPos())
+                if not self.market.upgrades.reborn :
+                    self.GameOver()
+                    break
+                self.market.upgrades.reborn = False 
 
             # Vérifie si mange une pomme
             if self.apple.verify_apple(self.ledboard.grid[self.snake.Snake_pos[0][0]][self.snake.Snake_pos[0][1]]) :
-                self.apple.apple_pos = self.apple.generate_apple(self.snake.Snake_pos)
+                self.apple.apple_pos = self.apple.generate_apple(self.snake.Snake_pos, self.market.upgrades.goldDrop)
                 self.addpoint()
-                self.ledboard.drawapple(self.apple.apple_pos)
+                self.ledboard.drawapple(self.apple)
                 self.snake.justAte = True
                 
             # Change la position du snake

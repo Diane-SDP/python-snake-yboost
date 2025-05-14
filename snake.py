@@ -1,10 +1,11 @@
 import direction 
 
 class Snake :
-    def __init__(self):
+
+    def __init__(self, dir):
         self.Snake_pos = [[0,0]]
         self.justAte = False
-        self.direction = direction.Direction()
+        self.direction = dir
     
     def update_position(self) :
         self.direction.change_direction()
@@ -23,3 +24,6 @@ class Snake :
             if self.Snake_pos[0] == elt :
                 return True
         return False
+
+    def getHeadPos(self) :
+        return self.Snake_pos[0]

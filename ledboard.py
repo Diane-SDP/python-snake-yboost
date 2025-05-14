@@ -1,5 +1,6 @@
 import neopixel
 import machine
+import time
 
 class LEDBoard :
     def __init__(self):
@@ -11,7 +12,10 @@ class LEDBoard :
             self.np[i] = (0,0,0)    
                 
     def drawapple(self, apple) :
-        self.np[apple] = (0,5,0)
+        if apple.golden :
+            self.np[apple.apple_pos] = (8,5,0)
+        else :
+            self.np[apple.apple_pos] = (0,5,0)
         self.np.write()
 
     def drawsnake(self, snakepos) :
@@ -22,3 +26,22 @@ class LEDBoard :
                     self.np[self.grid[snakepos[i][0]][snakepos[i][1]]] = (10, 0, 0)
         self.np[self.grid[snakepos[0][0]][snakepos[0][1]]] = (10, 5, 5)
         self.np.write()
+
+    def GOScreeen(self): 
+        n = self.np.n
+        for i in range(3 * n):
+            for j in range(n):
+                self.np[j] = (0, 0, 0)
+            self.np[i % n] = (5, 5, 5)
+            self.np.write()
+            time.sleep_ms(25)
+        self.np.write()
+
+    def drawCollision(self, headPos) :
+        for i in range(4):
+            self.np[self.grid[headPos[0]][headPos[1]]] = (20, 0, 0)
+            self.np.write()
+            time.sleep_ms(200)
+            self.np[self.grid[headPos[0]][headPos[1]]] = (10, 5, 5)
+            self.np.write()
+            time.sleep_ms(200)
