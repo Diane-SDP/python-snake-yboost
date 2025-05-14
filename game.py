@@ -30,7 +30,7 @@ class Game :
         self.snake = snake.Snake(self.direction)
         self.ledboard = ledboard.LEDBoard()
         self.apple = apple.Apple() 
-        self.market = market.Market()
+        self.market = market.Market(self.direction)
         print("Réinitialisation...")
         self.gameLoop()     
             
