@@ -6,7 +6,16 @@ Welcome to the Snake Game!
 
 1. **Objective**: Control the snake to eat apples and grow longer. Avoid colliding with the snake's own body.
 2. **Controls**: The game uses a joystick to change the snake's direction.
-3. **Game Over**: The game ends when the snake collides with itself. You can restart the game by pressing the restart button (button of the joystick).
+3. **Game Over**: The game ends when the snake collides with itself. After that, you can upgrade the game by purchasing items in the marketplace.
+
+## 🛒 MarketPlace
+
+In the marketplace, you can buy 3 items:
+-> Increase the value of an apple (initial value: 1)
+-> Increase the chance of getting a golden apple (initial chance: 0%)
+-> Buy a second life to use during the game
+
+You can also restart a game to collect more apples, or reset the entire game.
 
 ## 🛠️ Project Structure
 
@@ -16,6 +25,7 @@ Welcome to the Snake Game!
 - **`ledboard.py`**: Handles the LED board display for the game.
 - **`buzzer.py`**: Manages sound effects for the game.
 - **`direction.py`**: Handles the direction changes for the snake.
+- **`market.py`**: Manages the market place.
 
 ## 🚀 Getting Started
 
