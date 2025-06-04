@@ -11,9 +11,9 @@ Welcome to the Snake Game!
 ## 🛒 MarketPlace
 
 In the marketplace, you can buy 3 items:
--> Increase the value of an apple (initial value: 1)
--> Increase the chance of getting a golden apple (initial chance: 0%)
--> Buy a second life to use during the game
+1. Increase the value of an apple (initial value: 1)  
+2. Increase the chance of getting a golden apple (initial chance: 0%)  
+3. Buy a second life to use during the game  
 
 You can also restart a game to collect more apples, or reset the entire game.
 
